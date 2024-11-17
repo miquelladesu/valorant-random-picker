@@ -1,786 +1,807 @@
 @font-face {
-    font-family: 'VALORANT';
-    src: url('assets/fonts/Valorant Font.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "VALORANT";
+  src: url("assets/fonts/Valorant Font.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 :root {
-    --valorant-red: #FF4655;
-    --valorant-dark: #1F2326;
-    --valorant-gray: #53565B;
+  --valorant-red: #ff4655;
+  --valorant-dark: #1f2326;
+  --valorant-gray: #53565b;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--valorant-dark);
-    color: white;
-    font-family: 'VALORANT', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: var(--valorant-dark);
+  color: white;
+  font-family: "VALORANT", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-    text-align: center;
-    padding: 2rem;
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 h1 {
-    color: white;
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
 }
 
 h1 span {
-    color: var(--valorant-red);
+  color: var(--valorant-red);
 }
 
 #agentImage {
-    max-width: 300px;
-    border-radius: 5px;
-    margin-bottom: 1rem;
+  max-width: 300px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
 
 #agentName {
-    font-size: 2rem;
-    color: white;
-    transition: opacity 0.15s ease;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
-    animation: textPulse 2s ease-in-out infinite;
+  font-size: 2rem;
+  color: white;
+  transition: opacity 0.15s ease;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+  animation: textPulse 2s ease-in-out infinite;
 }
 
 #randomButton {
-    background: linear-gradient(45deg, var(--valorant-dark), var(--valorant-red));
-    border: 1px solid var(--valorant-red);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 1.2rem 3rem;
-    font-size: 1.3rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(45deg, var(--valorant-dark), var(--valorant-red));
+  border: 1px solid var(--valorant-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 1.2rem 3rem;
+  font-size: 1.3rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #randomButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    transition: 0.5s;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
 }
 
 #randomButton:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(255, 70, 85, 0.4);
-    letter-spacing: 4px;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(255, 70, 85, 0.4);
+  letter-spacing: 4px;
 }
 
 #randomButton:hover::before {
-    left: 100%;
+  left: 100%;
 }
 
 #randomButton:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 #randomButton:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: none;
-    background: linear-gradient(45deg, var(--valorant-dark), #832028);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  background: linear-gradient(45deg, var(--valorant-dark), #832028);
 }
 
 #randomButton:disabled:hover {
-    transform: none;
-    letter-spacing: 2px;
-    box-shadow: none;
+  transform: none;
+  letter-spacing: 2px;
+  box-shadow: none;
 }
 
 #randomButton:disabled::before {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
+  h1 {
+    font-size: 2rem;
+  }
 
-    #agentImage {
-        max-width: 200px;
-    }
+  #agentImage {
+    max-width: 200px;
+  }
 
-    #agentName {
-        font-size: 1.5rem;
-    }
+  #agentName {
+    font-size: 1.5rem;
+  }
 }
 
 .agents-grid {
-    display: grid;
-    grid-template-columns: repeat(8, minmax(120px, 1fr));
-    gap: 1rem;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  margin: 0 auto;
 }
 
 .agent-card {
-    position: relative;
-    aspect-ratio: 1;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--valorant-dark);
+  position: relative;
+  aspect-ratio: 1;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--valorant-dark);
 }
 
 .agent-card.banned {
-    filter: grayscale(100%) brightness(0.3);
-    border-color: #832028;
-    position: relative;
-    pointer-events: all; /* Enable interactions */
-    cursor: pointer;
+  filter: grayscale(100%) brightness(0.3);
+  border-color: #832028;
+  position: relative;
+  pointer-events: all; /* Enable interactions */
+  cursor: pointer;
 }
 
 .agent-card.banned::before {
-    content: '✕';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    color: #FF4655;
-    z-index: 2;
-    text-shadow: 0 0 10px rgba(255, 70, 85, 0.5);
-    transition: all 0.3s ease;
+  content: "✕";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: #ff4655;
+  z-index: 2;
+  text-shadow: 0 0 10px rgba(255, 70, 85, 0.5);
+  transition: all 0.3s ease;
 }
 
 .agent-card.banned:hover {
-    filter: grayscale(80%) brightness(0.4);
-    border-color: var(--valorant-red);
+  filter: grayscale(80%) brightness(0.4);
+  border-color: var(--valorant-red);
 }
 
 .agent-card.banned:hover::before {
-    transform: translate(-50%, -50%) scale(1.2);
-    color: white;
-    text-shadow: 0 0 15px var(--valorant-red);
+  transform: translate(-50%, -50%) scale(1.2);
+  color: white;
+  text-shadow: 0 0 15px var(--valorant-red);
 }
 
 .agent-card.banned img {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .ban-mode .agent-card:not(.banned):hover {
-    border-color: #832028;
-    box-shadow: 0 0 15px rgba(131, 32, 40, 0.4);
+  border-color: #832028;
+  box-shadow: 0 0 15px rgba(131, 32, 40, 0.4);
 }
 
 .selecting .agent-card {
-    filter: blur(2px) grayscale(50%);
-    transform: scale(0.95);
-    opacity: 0.6;
+  filter: blur(2px) grayscale(50%);
+  transform: scale(0.95);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  will-change: transform, opacity, filter;
 }
 
 .selecting .agent-card.active {
-    filter: none !important;
-    transform: scale(1.1) !important;
-    opacity: 1 !important;
-    border-color: var(--valorant-red);
-    box-shadow: 0 0 20px var(--valorant-red),
-                inset 0 0 10px rgba(255, 70, 85, 0.3);
-    animation: borderPulse 0.6s ease-in-out infinite alternate;
-    z-index: 5;
+  filter: none !important;
+  transform: scale(1.1) !important;
+  opacity: 1 !important;
+  transition: all 0.1s ease-out;
 }
 
 .agents-grid.has-selection .agent-card {
-    filter: blur(2px) grayscale(50%);
-    transform: scale(0.95);
-    opacity: 0.6;
-    transition: all 0.5s ease;
+  filter: blur(2px) grayscale(50%);
+  transform: scale(0.95);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  will-change: transform, opacity, filter;
 }
 
 .agents-grid.has-selection .agent-card.active {
-    filter: none !important;
-    transform: scale(1.1) !important;
-    opacity: 1 !important;
-    border-color: var(--valorant-red);
-    box-shadow: 0 0 30px var(--valorant-red),
-                inset 0 0 20px rgba(255, 70, 85, 0.3);
-    z-index: 5;
-    animation: finalReveal 1s ease-out forwards;
+  filter: none !important;
+  transform: scale(1.1) !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease-out;
+}
+
+.agents-grid.has-selection .agent-card.active {
+  filter: none !important;
+  transform: scale(1.1) !important;
+  opacity: 1 !important;
+  border-color: var(--valorant-red);
+  box-shadow: 0 0 30px var(--valorant-red),
+    inset 0 0 20px rgba(255, 70, 85, 0.3);
+  z-index: 5;
+  animation: finalReveal 1s ease-out forwards;
 }
 
 .agents-grid.has-selection .agent-card.active img {
-    animation: pulseImage 2s ease-in-out infinite;
+  animation: pulseImage 2s ease-in-out infinite;
 }
 
 .agents-grid.has-selection .agent-card.active .agent-name {
-    transform: translateY(0);
-    color: white;
-    text-shadow: 0 0 10px var(--valorant-red),
-                 0 0 20px rgba(255, 70, 85, 0.5);
-    letter-spacing: 1px;
-    background: linear-gradient(to top,
-                rgba(255, 70, 85, 0.3),
-                rgba(0, 0, 0, 0.8));
-    animation: nameGlow 1.5s ease-in-out infinite alternate;
+  transform: translateY(0);
+  color: white;
+  text-shadow: 0 0 10px var(--valorant-red), 0 0 20px rgba(255, 70, 85, 0.5);
+  letter-spacing: 1px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 70, 85, 0.3),
+    rgba(0, 0, 0, 0.8)
+  );
+  animation: nameGlow 1.5s ease-in-out infinite alternate;
 }
 
 .agent-card.active:hover .agent-name {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 @keyframes borderPulse {
-    from {
-        border-color: var(--valorant-red);
-        box-shadow: 0 0 20px var(--valorant-red),
-                    inset 0 0 10px rgba(255, 70, 85, 0.3);
-    }
-    to {
-        border-color: white;
-        box-shadow: 0 0 30px var(--valorant-red),
-                    inset 0 0 20px rgba(255, 70, 85, 0.5);
-    }
+  from {
+    border-color: var(--valorant-red);
+    box-shadow: 0 0 20px var(--valorant-red),
+      inset 0 0 10px rgba(255, 70, 85, 0.3);
+  }
+  to {
+    border-color: white;
+    box-shadow: 0 0 30px var(--valorant-red),
+      inset 0 0 20px rgba(255, 70, 85, 0.5);
+  }
 }
 
 @keyframes finalReveal {
-    0% {
-        transform: scale(1.1);
-        box-shadow: 0 0 30px var(--valorant-red);
-    }
-    50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 50px var(--valorant-red),
-                    inset 0 0 30px rgba(255, 70, 85, 0.5);
-    }
-    100% {
-        transform: scale(1.1);
-        box-shadow: 0 0 30px var(--valorant-red),
-                    inset 0 0 20px rgba(255, 70, 85, 0.3);
-    }
+  0% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px var(--valorant-red);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 50px var(--valorant-red),
+      inset 0 0 30px rgba(255, 70, 85, 0.5);
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px var(--valorant-red),
+      inset 0 0 20px rgba(255, 70, 85, 0.3);
+  }
 }
 
 @keyframes pulseImage {
-    0% {
-        filter: none;
-        transform: scale(1);
-    }
-    50% {
-        filter: brightness(1.2) contrast(1.1);
-        transform: scale(1.05);
-    }
-    100% {
-        filter: none;
-        transform: scale(1);
-    }
+  0% {
+    filter: none;
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(1.2) contrast(1.1);
+    transform: scale(1.05);
+  }
+  100% {
+    filter: none;
+    transform: scale(1);
+  }
 }
 
 .agent-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(50%) brightness(0.8);
-    transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(50%) brightness(0.8);
+  transition: all 0.3s ease;
 }
 
 .agent-card:hover img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.1);
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.1);
 }
 
 .agent-card.active {
-    border-color: var(--valorant-red);
-    transform: scale(1.05);
-    z-index: 2;
-    box-shadow: 0 0 20px rgba(255, 70, 85, 0.4);
+  border-color: var(--valorant-red);
+  transform: scale(1.05);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(255, 70, 85, 0.4);
 }
 
 .agent-card.active img {
-    filter: none;
+  filter: none;
 }
 
 .agent-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 30%;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .agent-card:hover::after,
 .agent-card.active::after {
-    opacity: 1;
+  opacity: 1;
 }
 
 .agent-name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.8rem 0.5rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    text-align: center;
-    transform: translateY(100%);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.8rem 0.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  text-align: center;
+  transform: translateY(100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
 }
 
 .agent-card:hover .agent-name,
 .agents-grid.has-selection .agent-card.active .agent-name {
-    transform: translateY(0);
-    color: white;
-    text-shadow: 0 0 10px var(--valorant-red),
-                 0 0 20px rgba(255, 70, 85, 0.5);
-    letter-spacing: 2px;
-    background: linear-gradient(45deg,
-                rgba(255, 70, 85, 0.4),
-                rgba(0, 0, 0, 0.9),
-                rgba(255, 70, 85, 0.4));
-    animation: nameGlow 2s ease-in-out infinite alternate,
-              gradientSlide 3s linear infinite;
-    border-top: 1px solid rgba(255, 70, 85, 0.3);
+  transform: translateY(0);
+  color: white;
+  text-shadow: 0 0 10px var(--valorant-red), 0 0 20px rgba(255, 70, 85, 0.5);
+  letter-spacing: 2px;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 70, 85, 0.4),
+    rgba(0, 0, 0, 0.9),
+    rgba(255, 70, 85, 0.4)
+  );
+  animation: nameGlow 2s ease-in-out infinite alternate,
+    gradientSlide 3s linear infinite;
+  border-top: 1px solid rgba(255, 70, 85, 0.3);
 }
 
 @keyframes gradientSlide {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes nameGlow {
-    from {
-        text-shadow: 0 0 4px var(--valorant-red),
-                     0 0 8px rgba(255, 70, 85, 0.5);
-        letter-spacing: 1px;
-    }
-    to {
-        text-shadow: 0 0 8px var(--valorant-red),
-                     0 0 15px var(--valorant-red),
-                     0 0 20px rgba(255, 70, 85, 0.7);
-        letter-spacing: 3px;
-    }
+  from {
+    text-shadow: 0 0 4px var(--valorant-red), 0 0 8px rgba(255, 70, 85, 0.5);
+    letter-spacing: 1px;
+  }
+  to {
+    text-shadow: 0 0 8px var(--valorant-red), 0 0 15px var(--valorant-red),
+      0 0 20px rgba(255, 70, 85, 0.7);
+    letter-spacing: 3px;
+  }
 }
 
 @media (max-width: 768px) {
-    .agents-grid {
-        grid-template-columns: repeat(4, minmax(80px, 1fr));
-        gap: 0.5rem;
-        padding: 1rem;
-    }
+  .agents-grid {
+    grid-template-columns: repeat(4, minmax(80px, 1fr));
+    gap: 0.5rem;
+    padding: 1rem;
+  }
 }
 
 @media (min-width: 1200px) {
-    .agents-grid {
-        grid-template-columns: repeat(8, minmax(120px, 1fr));
-    }
+  .agents-grid {
+    grid-template-columns: repeat(8, minmax(120px, 1fr));
+  }
 }
 
 @media (max-width: 1200px) {
-    .agents-grid {
-        grid-template-columns: repeat(6, minmax(100px, 1fr));
-    }
+  .agents-grid {
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+  }
 }
 
 @media (max-width: 480px) {
-    .agents-grid {
-        grid-template-columns: repeat(3, minmax(80px, 1fr));
-    }
+  .agents-grid {
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+  }
 }
 
 .controls {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .mode-controls {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .mode-button {
-    background: var(--valorant-dark);
-    border: 1px solid var(--valorant-gray);
-    color: white;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background: var(--valorant-dark);
+  border: 1px solid var(--valorant-gray);
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .mode-button.active {
-    background: var(--valorant-red);
-    border-color: var(--valorant-red);
+  background: var(--valorant-red);
+  border-color: var(--valorant-red);
 }
 
 .reset-button {
-    background: none;
-    border: none;
-    color: var(--valorant-gray);
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
+  background: none;
+  border: none;
+  color: var(--valorant-gray);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 .reset-button:hover {
-    color: var(--valorant-red);
+  color: var(--valorant-red);
 }
 
 .reset-icon {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .selected-agent {
-    background: rgba(255, 70, 85, 0.1);
-    padding: 1.5rem 3rem;
-    border-radius: 8px;
-    border: 2px solid var(--valorant-red);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+  background: rgba(255, 70, 85, 0.1);
+  padding: 1.5rem 3rem;
+  border-radius: 8px;
+  border: 2px solid var(--valorant-red);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .selected-agent::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 70, 85, 0.1) 0%,
-        transparent 70%
-    );
-    animation: pulseGlow 2s ease-in-out infinite;
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 70, 85, 0.1) 0%,
+    transparent 70%
+  );
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
 @keyframes pulseGlow {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.5;
-    }
-    50% {
-        transform: translate(-25%, -25%) scale(1.5);
-        opacity: 0.2;
-    }
-    100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.5;
-    }
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-25%, -25%) scale(1.5);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
 }
 
 @keyframes textPulse {
-    0% {
-        text-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
-    }
-    50% {
-        text-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
-    }
-    100% {
-        text-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
-    }
+  0% {
+    text-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+  }
 }
 
 @media (max-width: 768px) {
-    #randomButton {
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-    }
+  #randomButton {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
 
-    #randomButton:hover {
-        letter-spacing: 3px;
-    }
+  #randomButton:hover {
+    letter-spacing: 3px;
+  }
 
-    .selected-agent {
-        padding: 1.2rem 2rem;
-    }
+  .selected-agent {
+    padding: 1.2rem 2rem;
+  }
 }
 
 #randomButton {
-    background: linear-gradient(45deg, var(--valorant-dark), var(--valorant-red));
-    border: 1px solid var(--valorant-red);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  background: linear-gradient(45deg, var(--valorant-dark), var(--valorant-red));
+  border: 1px solid var(--valorant-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .valorant-logo {
-    height: 50px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: logoFloat 3s ease-in-out infinite,
-              logoGradient 4s linear infinite;
+  height: 50px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: logoFloat 3s ease-in-out infinite, logoGradient 4s linear infinite;
 }
 
 .title:hover .valorant-logo {
-    filter: brightness(0) invert(1) drop-shadow(0 0 8px var(--valorant-red));
-    transform: scale(1.2) rotate(-5deg);
-    animation: logoFloat 3s ease-in-out infinite,
-              logoGradient 2s linear infinite;
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px var(--valorant-red));
+  transform: scale(1.2) rotate(-5deg);
+  animation: logoFloat 3s ease-in-out infinite, logoGradient 2s linear infinite;
 }
 
 @keyframes logoPulse {
-    0% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--valorant-red));
-    }
-    50% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 8px var(--valorant-red));
-    }
-    100% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--valorant-red));
-    }
+  0% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--valorant-red));
+  }
+  50% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px var(--valorant-red));
+  }
+  100% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--valorant-red));
+  }
 }
 
 @keyframes logoGradient {
-    0% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-    }
-    25% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
-    }
-    50% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-    }
-    75% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
-    }
-    100% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-    }
+  0% {
+    filter: brightness(0) invert(1)
+      drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+  }
+  25% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
+  }
+  50% {
+    filter: brightness(0) invert(1)
+      drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+  }
+  75% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
+  }
+  100% {
+    filter: brightness(0) invert(1)
+      drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+  }
 }
 
 @media (max-width: 768px) {
-    .agents-grid {
-        grid-template-columns: repeat(4, minmax(80px, 1fr));
-        gap: 0.5rem;
-        padding: 1rem;
-    }
+  .agents-grid {
+    grid-template-columns: repeat(4, minmax(80px, 1fr));
+    gap: 0.5rem;
+    padding: 1rem;
+  }
 
-    .valorant-logo {
-        height: 30px;
-        margin-bottom: 1.5rem;
-    }
+  .valorant-logo {
+    height: 30px;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    padding: 1.5rem;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 70, 85, 0.1),
-        transparent);
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 70, 85, 0.1),
+    transparent
+  );
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
 }
 
 .title::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 70, 85, 0.2),
-        transparent
-    );
-    animation: shine 3s infinite;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 70, 85, 0.2),
+    transparent
+  );
+  animation: shine 3s infinite;
 }
 
 .valorant-logo {
-    height: 50px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: logoFloat 3s ease-in-out infinite,
-              logoGradient 4s linear infinite;
+  height: 50px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: logoFloat 3s ease-in-out infinite, logoGradient 4s linear infinite;
 }
 
 .title:hover .valorant-logo {
-    filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
-    transform: scale(1.2) rotate(-5deg);
-    animation: logoFloat 3s ease-in-out infinite,
-              logoGradient 2s linear infinite;
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
+  transform: scale(1.2) rotate(-5deg);
+  animation: logoFloat 3s ease-in-out infinite, logoGradient 2s linear infinite;
 }
 
 .title-text {
-    font-size: 3rem;
-    letter-spacing: 4px;
-    position: relative;
-    background: linear-gradient(
-        45deg,
-        white 30%,
-        var(--valorant-red) 50%,
-        white 70%
-    );
-    background-size: 200% auto;
-    color: white;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 4s linear infinite;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 3rem;
+  letter-spacing: 4px;
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    white 30%,
+    var(--valorant-red) 50%,
+    white 70%
+  );
+  background-size: 200% auto;
+  color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .title:hover .title-text {
-    transform: perspective(500px) translateZ(50px);
-    text-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
-    letter-spacing: 8px;
+  transform: perspective(500px) translateZ(50px);
+  text-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
+  letter-spacing: 8px;
 }
 
 .title-text::after {
-    display: none;
+  display: none;
 }
 
 .title-text::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg,
-        transparent,
-        var(--valorant-red),
-        transparent);
-    transition: width 0.5s ease;
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--valorant-red),
+    transparent
+  );
+  transition: width 0.5s ease;
 }
 
 .title:hover .title-text::after {
-    width: 100%;
+  width: 100%;
 }
 
 @keyframes shine {
-    0% { left: -100%; }
+  0% {
+    left: -100%;
+  }
 
-    100% { left: 100%; }
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes logoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 @keyframes shimmer {
-    0% { background-position: 200% center; }
-    100% { background-position: -200% center; }
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
 
 @media (max-width: 768px) {
-    .title {
-        gap: 1rem;
-        margin-bottom: 2rem;
-        padding: 1rem;
-    }
+  .title {
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
 
-    .title:hover .title-text {
-        letter-spacing: 4px;
-        transform: perspective(300px) translateZ(30px);
-    }
+  .title:hover .title-text {
+    letter-spacing: 4px;
+    transform: perspective(300px) translateZ(30px);
+  }
 
-    .valorant-logo {
-        height: 35px;
-    }
+  .valorant-logo {
+    height: 35px;
+  }
 
-    .title-text {
-        font-size: 2rem;
-        letter-spacing: 2px;
-    }
+  .title-text {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
 }
 
 .title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .valorant-logo {
-    height: 40px;
-    width: auto;
-    filter: brightness(0) invert(1);
+  height: 40px;
+  width: auto;
+  filter: brightness(0) invert(1);
 }
 
 .title-text {
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-    position: relative;
-    transition: all 0.3s ease;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .title-text::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--valorant-red);
-    transition: width 0.3s ease;
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--valorant-red);
+  transition: width 0.3s ease;
 }
 
 .title:hover .title-text::after {
-    width: 100%;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
-    .title {
-        gap: 0.5rem;
-    }
+  .title {
+    gap: 0.5rem;
+  }
 
-    .valorant-logo {
-        height: 30px;
-    }
+  .valorant-logo {
+    height: 30px;
+  }
 
-    .title-text {
-        font-size: 1.8rem;
-    }
+  .title-text {
+    font-size: 1.8rem;
+  }
 }
-

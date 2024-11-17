@@ -96,21 +96,14 @@ characters.forEach((agent, index) => {
 const agentCards = document.querySelectorAll('.agent-card');
 
 function updateSelectedAgent(index) {
-    selectedAgentIndex = index;
-
-    agentName.style.opacity = '0';
+    agentCards.forEach(card => card.classList.remove('active'));
+    agentCards[index].classList.add('active');
     agentsGrid.classList.remove('selecting');
+    agentsGrid.classList.add('has-selection');
 
-    setTimeout(() => {
-        agentCards.forEach(card => card.classList.remove('active'));
-        agentCards[index].classList.add('active');
-        agentsGrid.classList.add('has-selection');
-
-        setTimeout(() => {
-            agentName.textContent = characters[index].name;
-            agentName.style.opacity = '1';
-        }, 300);
-    }, 200);
+    agentName.textContent = characters[index].name;
+    agentName.style.opacity = '1';
+    selectedAgentIndex = index;
 }
 
 function highlightAgent(index) {
@@ -122,43 +115,53 @@ function highlightAgent(index) {
 function pickRandomAgent() {
     if (isSelecting) return;
 
-    const availableAgents = characters.filter((_, index) => !bannedAgents.has(index));
+    const availableAgents = [];
+    characters.forEach((_, index) => {
+        if (!bannedAgents.has(index)) {
+            availableAgents.push(index);
+        }
+    });
+
     if (availableAgents.length === 0) return;
 
     randomButton.disabled = true;
     isSelecting = true;
-
     agentsGrid.classList.remove('has-selection');
     agentsGrid.classList.add('selecting');
 
-    let cycles = 0;
-    const maxCycles = 1;
-    const totalAgents = characters.length;
+    let currentIndex = 0;
     let speed = 50;
-    const maxSpeed = 200;
+    const speedIncrease = 1.2;
+    const maxSpeed = 300;
+    const minCycles = 20; // Minimum number of highlights before stopping
 
     function cycle() {
-        currentHighlight = (currentHighlight + 1) % totalAgents;
-        highlightAgent(currentHighlight);
-
-        if (currentHighlight === totalAgents - 1) {
-            cycles++;
+        // Remove previous highlight
+        if (currentHighlight >= 0) {
+            agentCards[currentHighlight].classList.remove('active');
         }
 
-        if (cycles < maxCycles) {
-            speed = Math.min(maxSpeed, speed * 1.1);
+        // Get next available agent
+        do {
+            currentHighlight = (currentHighlight + 1) % characters.length;
+        } while (bannedAgents.has(currentHighlight));
+
+        // Highlight current agent
+        agentCards[currentHighlight].classList.add('active');
+        currentIndex++;
+
+        // Continue cycling or finish
+        if (currentIndex < minCycles || speed < maxSpeed) {
+            speed = Math.min(maxSpeed, speed * speedIncrease);
             setTimeout(cycle, speed);
         } else {
-            const finalIndex = characters.findIndex((_, index) =>
-                !bannedAgents.has(index) &&
-                Math.random() < 1/availableAgents.length
-            );
+            // Select final agent
+            const finalIndex = availableAgents[Math.floor(Math.random() * availableAgents.length)];
             setTimeout(() => {
                 updateSelectedAgent(finalIndex);
                 isSelecting = false;
-                agentsGrid.classList.remove('selecting');
                 randomButton.disabled = false;
-            }, speed);
+            }, 200);
         }
     }
 
