@@ -155,6 +155,46 @@ h1 span {
     background: var(--valorant-dark);
 }
 
+.agent-card.banned {
+    filter: grayscale(100%) brightness(0.3);
+    border-color: #832028;
+    position: relative;
+    pointer-events: all; /* Enable interactions */
+    cursor: pointer;
+}
+
+.agent-card.banned::before {
+    content: '✕';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: #FF4655;
+    z-index: 2;
+    text-shadow: 0 0 10px rgba(255, 70, 85, 0.5);
+    transition: all 0.3s ease;
+}
+
+.agent-card.banned:hover {
+    filter: grayscale(80%) brightness(0.4);
+    border-color: var(--valorant-red);
+}
+
+.agent-card.banned:hover::before {
+    transform: translate(-50%, -50%) scale(1.2);
+    color: white;
+    text-shadow: 0 0 15px var(--valorant-red);
+}
+
+.agent-card.banned img {
+    transform: scale(0.95);
+}
+
+.ban-mode .agent-card:not(.banned):hover {
+    border-color: #832028;
+    box-shadow: 0 0 15px rgba(131, 32, 40, 0.4);
+}
 
 .selecting .agent-card {
     filter: blur(2px) grayscale(50%);
@@ -386,8 +426,45 @@ h1 span {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
-    position: relative;
+    gap: 1rem;
+}
+
+.mode-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mode-button {
+    background: var(--valorant-dark);
+    border: 1px solid var(--valorant-gray);
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-button.active {
+    background: var(--valorant-red);
+    border-color: var(--valorant-red);
+}
+
+.reset-button {
+    background: none;
+    border: none;
+    color: var(--valorant-gray);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.reset-button:hover {
+    color: var(--valorant-red);
+}
+
+.reset-icon {
+    width: 20px;
+    height: 20px;
 }
 
 .selected-agent {
@@ -569,7 +646,7 @@ h1 span {
     filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--valorant-red));
     transform: scale(1.2) rotate(-5deg);
     animation: logoFloat 3s ease-in-out infinite,
-              logoGradient 2s linear infinite; 
+              logoGradient 2s linear infinite;
 }
 
 .title-text {

@@ -26,6 +26,54 @@ const characters = [
   { name: 'Yoru', image: 'assets/characters/yoru.png' },
 ];
 
+let isBanMode = false;
+const bannedAgents = new Set();
+
+function toggleBanMode() {
+    isBanMode = !isBanMode;
+    const banButton = document.getElementById('banButton');
+    banButton.classList.toggle('active');
+    agentsGrid.classList.toggle('ban-mode');
+
+    // Update button text with current ban count
+    banButton.textContent = isBanMode ? `BAN MODE (${bannedAgents.size})` : 'BAN MODE';
+}
+
+function resetBans() {
+    bannedAgents.clear();
+    agentCards.forEach(card => {
+        card.classList.remove('banned');
+        card.style.animation = 'unbanPulse 0.3s ease-out';
+        setTimeout(() => card.style.animation = '', 300);
+    });
+    randomButton.disabled = false;
+    document.getElementById('banButton').textContent = 'BAN MODE';
+}
+
+function handleAgentClick(card, index) {
+    if (!isBanMode) return;
+
+    if (bannedAgents.has(index)) {
+        bannedAgents.delete(index);
+        card.classList.remove('banned');
+        card.style.animation = 'unbanPulse 0.3s ease-out';
+        setTimeout(() => card.style.animation = '', 300);
+    } else {
+        bannedAgents.add(index);
+        card.classList.add('banned');
+        card.style.animation = 'banPulse 0.3s ease-out';
+        setTimeout(() => card.style.animation = '', 300);
+    }
+
+    // Update button state and banned count
+    const bannedCount = bannedAgents.size;
+    randomButton.disabled = bannedCount >= characters.length;
+
+    // Update ban button text
+    const banButton = document.getElementById('banButton');
+    banButton.textContent = `BAN MODE (${bannedCount})`;
+}
+
 const randomButton = document.getElementById('randomButton');
 const agentImage = document.getElementById('agentImage');
 const agentName = document.getElementById('agentName');
@@ -41,6 +89,7 @@ characters.forEach((agent, index) => {
         <img src="${agent.image}" alt="${agent.name}">
         <div class="agent-name">${agent.name}</div>
     `;
+    agentCard.addEventListener('click', () => handleAgentClick(agentCard, index));
     agentsGrid.appendChild(agentCard);
 });
 
@@ -73,6 +122,9 @@ function highlightAgent(index) {
 function pickRandomAgent() {
     if (isSelecting) return;
 
+    const availableAgents = characters.filter((_, index) => !bannedAgents.has(index));
+    if (availableAgents.length === 0) return;
+
     randomButton.disabled = true;
     isSelecting = true;
 
@@ -97,7 +149,10 @@ function pickRandomAgent() {
             speed = Math.min(maxSpeed, speed * 1.1);
             setTimeout(cycle, speed);
         } else {
-            const finalIndex = Math.floor(Math.random() * totalAgents);
+            const finalIndex = characters.findIndex((_, index) =>
+                !bannedAgents.has(index) &&
+                Math.random() < 1/availableAgents.length
+            );
             setTimeout(() => {
                 updateSelectedAgent(finalIndex);
                 isSelecting = false;
@@ -114,4 +169,20 @@ randomButton.addEventListener('click', pickRandomAgent);
 
 agentImage.style.transition = 'opacity 0.3s ease';
 agentName.style.transition = 'opacity 0.3s ease';
+
+// Add these animation keyframes to your CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes banPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+    }
+    @keyframes unbanPulse {
+        0% { transform: scale(0.9); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(style);
 
